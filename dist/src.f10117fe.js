@@ -136,6 +136,18 @@ var CustomMap = function () {
     });
   }
 
+  CustomMap.prototype.addUserMarker = function (user) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    });
+  };
+
+  CustomMap.prototype.addCompanyMarker = function (company) {};
+
   return CustomMap;
 }();
 
