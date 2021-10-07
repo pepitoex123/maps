@@ -136947,22 +136947,38 @@ var CustomMap = function () {
   }
 
   CustomMap.prototype.addUserMarker = function (user) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: user.location.lat,
         lng: user.location.lng
       }
     });
+    marker.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: user.name + " is the name of the user"
+      });
+      infoWindow.open(_this.googleMap, marker);
+    });
   };
 
   CustomMap.prototype.addCompanyMarker = function (company) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: company.location.lat,
         lng: company.location.lng
       }
+    });
+    marker.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: company.companyName + " is the name of the company, and their catch phrase is " + company.catchPhrase
+      });
+      infoWindow.open(_this.googleMap, marker);
     });
   };
 

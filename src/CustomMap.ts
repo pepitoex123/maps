@@ -16,24 +16,39 @@ export class CustomMap {
     }
 
     addUserMarker(user: User): void{
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             map: this.googleMap,
             position: {
                 lat: user.location.lat,
                 lng: user.location.lng
             }
         })
+        marker.addListener("click",() => {
+            const infoWindow = new google.maps.InfoWindow({
+                content: `${user.name} is the name of the user`
+            })
+            infoWindow.open(this.googleMap,marker)
+        })
     }
 
     addCompanyMarker(company: Company): void{
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             map: this.googleMap,
             position:{
                 lat: company.location.lat,
                 lng: company.location.lng
             }
         })
+        marker.addListener("click",() => {
+            const infoWindow = new google.maps.InfoWindow({
+                content: `${company.companyName} is the name of the company, and their catch phrase is ${company.catchPhrase}`
+            })
+            infoWindow.open(this.googleMap,marker)
+        })
     }
+
+
+
 
 
 
